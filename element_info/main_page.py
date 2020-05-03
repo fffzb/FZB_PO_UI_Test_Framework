@@ -19,10 +19,10 @@ class MainPage:
         self.product_menu = self.driver.find_element(By.XPATH,'//li[@data-id="product"]')
         self.username_showspan = self.driver.find_element(By.XPATH,'//span[@class="user-name"]')
 
-    def get_companyname(self,username): #获取公司名称
+    def get_companyname(self): #获取公司名称
         value = self.companyname_showbox.get_attribute('title')
         return value
-    def goto_myzone(self,password): #进入我的地盘菜单
+    def goto_myzone(self): #进入我的地盘菜单
         value = self.myzone_menu.click()
         return value
     def goto_product(self): #进入产品菜单
@@ -35,5 +35,7 @@ class MainPage:
 
 if __name__ == '__main__':
     main_page = MainPage()
+    main_page.goto_myzone()
+    main_page.goto_product()
     username = main_page.get_username()
     print(username)
