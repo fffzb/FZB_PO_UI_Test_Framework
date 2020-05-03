@@ -1,6 +1,7 @@
 import os
 from selenium import webdriver
 from selenium.webdriver.common.by import By
+from common.log_utils import logger
 
 current_path = os.path.dirname(__file__)
 driver_path = os.path.join(current_path,'../webdriver/chromedriver.exe')
@@ -16,13 +17,15 @@ class LoginPage:
         self.login_button = self.driver.find_element(By.XPATH,'//button[@id="submit"]')
         self.keeplogin_check = self.driver.find_element(By.XPATH,'//input[@name="keepLogin[]"]')
         self.forgetpassword_link = None
-    def input_username(self,username): #方法 ==》控件的操作
-        self.username_input.send_keys(username)
     def input_password(self,password):
         self.password_input.send_keys(password)
+        logger.info('密码输入：' + str(password))
     def click_login(self):
         self.login_button.click()
-
+    def input_username(self,username): #方法 ==》控件的操作
+        self.username_input.send_keys(username)
+        logger.info('用户名输入：'+ str(username))
+        logger.info('点击登录按钮')
 if __name__ == '__main__':
     login_page = LoginPage()
     login_page.input_username('admin')
