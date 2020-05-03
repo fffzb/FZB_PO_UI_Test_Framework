@@ -20,3 +20,11 @@ file:2020-05-03 17:47:51,237 - root - INFO - 获取用户名成功，用户名是：admin
 file:2020-05-03 18:11:55,351 - root - INFO - 用户名输入：admin
 file:2020-05-03 18:11:55,360 - root - INFO - 点击登录按钮
 file:2020-05-03 18:11:55,774 - root - INFO - 密码输入：fzb123456
+file:2020-05-03 19:34:47,285 - root - INFO - 打开url地址 http://127.0.0.1/zentao/user-login-L3plbnRhby9teS5odG1s.html
+file:2020-05-03 19:42:58,655 - root - INFO - 打开url地址 http://127.0.0.1/zentao/user-login-L3plbnRhby9teS5odG1s.html
+file:2020-05-03 19:42:58,699 - root - INFO - [用户名输入框]元素识别成功
+file:2020-05-03 19:42:58,922 - root - INFO - [用户名输入框]元素输入内容：admin
+file:2020-05-03 19:42:58,984 - root - INFO - [密码输入框]元素识别成功
+file:2020-05-03 19:42:59,369 - root - INFO - [密码输入框]元素输入内容：fzb123456
+file:2020-05-03 19:42:59,431 - root - INFO - [登录按钮]元素识别成功
+file:2020-05-03 19:42:59,847 - root - INFO - [登录按钮]元素进行点击操作成功
