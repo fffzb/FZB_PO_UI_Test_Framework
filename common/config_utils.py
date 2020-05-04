@@ -9,18 +9,29 @@ class ConfigUtils:
         self.__conf = configparser.ConfigParser()
         self.__conf.read(self.__config_path,encoding='utf-8')
     def read_ini(self,sec,option):
-        value = self.__conf.get(sec,option)
-        return value
-    @property
-    def get_excel_path(self):
-        value = self.read_ini('default','excel_path')
-        return value
+        return self.__conf.get(sec,option)
+
     @property
     def get_log_path(self):
-        value = self.read_ini('default', 'log_path')
-        return value
+        return self.read_ini('log', 'log_path')
+
+    @property
+    def zantao_url(self):
+        return self.read_ini("zentao", "zentao_url")
+
+    @property
+    def user_name(self):
+        return self.read_ini("user", "user_name")
+
+    @property
+    def password(self):
+        return self.read_ini("user", "password")
+
+    @property
+    def chrome_path(self):
+        return self.read_ini("driver", "chrome_path")
 Config = ConfigUtils()
 
 if __name__ == '__main__':
-    config_u = ConfigUtils()
-    print(config_u.get_excel_path)
+    config = ConfigUtils()
+    print(config.zantao_url)

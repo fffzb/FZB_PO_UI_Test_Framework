@@ -5,7 +5,7 @@ from selenium.webdriver.common.by import By
 from common.log_utils import logger
 from selenium.webdriver.support.wait import WebDriverWait
 
-class BasePage:
+class BasePage(object):
     def __init__(self,driver):
         self.driver = driver
 
@@ -31,20 +31,20 @@ class BasePage:
     #元素相关的封装
     #element_info = {'element_name':'用户名输入框','locator_type':'xpath','locator_value':'//input[@id="account"]','timeout':5}
     def find_element(self,element_info):
+        locator_element_name = element_info['element_name']
         locator_type_name = element_info['locator_type']
         locator_value_info = element_info['locator_value']
-        locator_time_out = element_info['timeout']
+        locator_timeout = element_info['timeout']
         if locator_type_name == 'id':
             locator_type = By.ID
-        elif locator_type_name == 'class':
+        elif locator_type_name == 'CLASS_NAME':
             locator_type = By.CLASS_NAME
-        elif locator_type_name == 'xpath':
+        elif locator_type_name == 'XPATH':
             locator_type = By.XPATH
-        elif locator_type_name == 'css':
-            locator_type = By.CSS_SELECTOR
-        element = WebDriverWait(self.driver,locator_time_out)\
-            .until(lambda x:x.find_element(locator_type,locator_value_info))
-        logger.info('[%s]元素识别成功'%element_info['element_name'])
+        element = WebDriverWait(self.driver, int(locator_timeout)) \
+            .until(lambda x: x.find_element(locator_type, locator_value_info))
+        logger.info('%s：  元素识别成功' % locator_element_name)
+
         return element
 
     def click(self,element_info):
@@ -55,3 +55,12 @@ class BasePage:
         element = self.find_element(element_info)
         element.send_keys(content)
         logger.info('[%s]元素输入内容：%s' % (element_info['element_name'],content))
+    # 获取属性值
+    def get_attribute(self,element_info):
+        element = self.find_element(element_info)
+        value = element.get_attribute('title')
+        logger.info('[%s]属性值为:%s' % (element_info['element_name'],value))
+    # 获取文本信息
+    def get_text(self,element_info):
+        text = self.find_element(element_info).text
+        logger.info('[%s]对象的文本信息为:%s' % (element_info['element_name'], text))
