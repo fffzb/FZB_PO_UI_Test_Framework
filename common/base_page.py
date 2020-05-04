@@ -4,6 +4,8 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from common.log_utils import logger
 from selenium.webdriver.support.wait import WebDriverWait
+from selenium.webdriver.common.action_chains import ActionChains
+from selenium.webdriver.common.keys import Keys
 
 class BasePage(object):
     def __init__(self,driver):
@@ -26,8 +28,8 @@ class BasePage(object):
         value = self.driver.title
         logger.info('获取网页标题，标题是：%s' % value)
         return value
-    def exit(self):
-        self.driver.quit()
+    def close(self):
+        self.driver.close()
     #元素相关的封装
     #element_info = {'element_name':'用户名输入框','locator_type':'xpath','locator_value':'//input[@id="account"]','timeout':5}
     def find_element(self,element_info):
@@ -64,3 +66,35 @@ class BasePage(object):
     def get_text(self,element_info):
         text = self.find_element(element_info).text
         logger.info('[%s]对象的文本信息为:%s' % (element_info['element_name'], text))
+    #frame处理
+    #切换到frame
+    def switch_to_frame(self, frame):
+        self.driver.switch_to.frame(frame)
+        time.sleep(2)
+    #切换至最外层frame
+    def switch_to_default_content(self):
+        self.driver.switch_to.default_content()
+        time.sleep(2)
+    # alert处理
+    def switch_to_alert(self):
+        alert = self.driver.switch_to.alert
+        text = alert.text
+        alert.accept()
+        logger.info('弹窗提示值为：  %s' % text)
+    # 鼠标右击
+    def mouse_right_click(self, element_info):
+        mouse = ActionChains(self.driver)
+        element = self.find_element(element_info)
+        mouse.context_click(element).perform()
+    # 键盘常用操作
+    def key_board_operate(self, element, operate):
+        if operate == 'enter':
+            element.send_keys(Keys.ENTER)
+        elif operate == 'up':
+            element.send_keys(Keys.UP)
+        elif operate == 'dowm':
+            element.send_keys(Keys.DOWN)
+        elif operate == 'left':
+            element.send_keys(Keys.LEFT)
+        elif operate == 'right':
+            element.send_keys(Keys.RIGHT)
