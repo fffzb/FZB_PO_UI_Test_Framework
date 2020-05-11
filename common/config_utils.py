@@ -30,8 +30,20 @@ class ConfigUtils:
     @property
     def chrome_path(self):
         return self.read_ini("driver", "chrome_path")
+    @property
+    def url(self):
+        url_value = self.read_ini("default", "url")
+        return url_value
+    @property
+    def driver_path(self):
+        driver_path_value = self.read_ini("default", "driver_path")
+        return driver_path_value
+    @property
+    def driver_name(self):
+        driver_name_value = self.read_ini('default','driver_name')
+        return driver_name_value
 Config = ConfigUtils()
 
 if __name__ == '__main__':
     config = ConfigUtils()
-    print(config.zantao_url)
+    print(config.driver_name)

@@ -5,7 +5,7 @@ from common.log_utils import logger
 from common.base_page import BasePage
 from common.config_utils import Config
 from common.element_data_utils import ElementdataUtils
-from common import login
+from common.browser import Browser
 from common import set_driver
 
 
@@ -35,7 +35,7 @@ class LoginPage(BasePage):
     def click_login(self):
         self.click(self.login_click)
 if __name__ == '__main__':
-    driver = set_driver.set_driver()
+    driver = Browser().get_driver()
     login_page =  LoginPage(driver)
     login_page.open_url(Config.zantao_url)
     login_page.input_username(Config.user_name)
